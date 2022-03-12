@@ -1,18 +1,17 @@
 #include <iostream>
 #include <iomanip>
-
+#include <memory>
+#include "model.h"
+#include "console_view.h"
 
 int main(int argc, char* argv[])
 {
-    std::cout << "argc == " << argc << '\n';
- 
-    for(int ndx{}; ndx != argc; ++ndx) {
-        std::cout << "argv[" << ndx << "] == " << std::quoted(argv[ndx]) << '\n';
-    }
-    std::cout << "argv[" << argc << "] == "
-              << static_cast<void*>(argv[argc]) << '\n';
-    /*...*/
-    return argc == 3 ? EXIT_SUCCESS : EXIT_FAILURE; // optional return value
-  
+
+    auto processing = std::make_shared<Model>(argc, argv);
+    
+    auto cli = CliView::create(processing);
+    
+    processing->print();
+    
 }
 

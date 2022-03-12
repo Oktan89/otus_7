@@ -9,7 +9,7 @@ option(WITH_GOOGLE_TEST "Whether to build Google tets" ON)
 
 configure_file(version.h.in version.h)
 
-add_executable(${MY_PROJECT_NAME} main.cpp)
+add_executable(${MY_PROJECT_NAME} main.cpp model.cpp console_view.cpp)
 add_library(print_ver lib.cpp)
 
 set_target_properties(${MY_PROJECT_NAME} PROPERTIES
