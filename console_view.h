@@ -2,7 +2,7 @@
 #include "interface.h"
 #include <iostream>
 
-class CliView : public ICliViewObserver, public std::enable_shared_from_this<CliView>
+class CliView : public IViewObserver, public std::enable_shared_from_this<CliView>
 {
 public:
     using model =  std::shared_ptr<class Model>;

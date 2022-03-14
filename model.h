@@ -6,11 +6,11 @@
 
 class __baseModel : public IModelObservable
 {
-    std::list<std::weak_ptr<ICliViewObserver>> __observer;
+    std::list<std::weak_ptr<IViewObserver>> __observer;
 public:
-    void addObserver(std::shared_ptr<ICliViewObserver> observer) override;
+    void addObserver(std::shared_ptr<IViewObserver> observer) override;
 
-    void removeObserver(std::shared_ptr<ICliViewObserver> observer) override;
+    void removeObserver(std::shared_ptr<IViewObserver> observer) override;
 
     void notify() override;
     

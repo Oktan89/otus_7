@@ -1,16 +1,16 @@
 #pragma once
 #include <memory>
 
-struct ICliViewObserver
+struct IViewObserver
 {
     virtual void update() = 0;
-    ~ICliViewObserver() = default;
+    ~IViewObserver() = default;
 };
 
 struct IModelObservable
 {
-    virtual void addObserver(std::shared_ptr<ICliViewObserver>) = 0;
-    virtual void removeObserver(std::shared_ptr<ICliViewObserver>) = 0;
+    virtual void addObserver(std::shared_ptr<IViewObserver>) = 0;
+    virtual void removeObserver(std::shared_ptr<IViewObserver>) = 0;
     virtual void notify() = 0;
     ~IModelObservable() = default;
 };
