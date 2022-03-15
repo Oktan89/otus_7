@@ -1,4 +1,5 @@
 #include "model.h"
+#include "state.h"
 #include <iostream>
 #include <stdexcept>
 #include <cctype>
@@ -38,7 +39,7 @@ Model::Model(int argc, char* argv[])
     {
         std::cout << "The block size parameter is required \n" 
             <<"Usage: "<< argv[0] << " [arg] \n";
-        exit(0);
+        // exit(0);
     }
     else
     {
@@ -50,9 +51,10 @@ Model::Model(int argc, char* argv[])
         {
             std::cout << "Invalid parameter [arg], must be greater than: >=1\n"
                 <<"Usage example: "<< argv[0] << " 3 \n";
-            exit(0);
+            // exit(0);
         }
-    }    
+    }
+    _state = std::make_unique<StaticBlock>(shared_from_this());    
 }
 
 void Model::print()
@@ -68,4 +70,28 @@ bool Model::__isdigit(char ch)
 int Model::get_batch_size() const noexcept
 {
     return _batch_size;
+}
+
+void Model::push(const std::string& com)
+{
+    if(com == "EOF")
+    {
+        _state->EndBlock();
+    }
+    else if(com == "{")
+    {
+        _batch.emplace_back(com);
+        _state->ReadBlock();
+    }
+
+}
+
+bool Model::getStatus() const noexcept
+{
+    return status;
+}
+
+std::vector<std::string>& Model::getData()
+{
+    return _batch;
 }

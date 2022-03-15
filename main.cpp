@@ -3,15 +3,19 @@
 #include <memory>
 #include "model.h"
 #include "console_view.h"
+#include "controller.h"
 
 int main(int argc, char* argv[])
 {
 
-    auto processing = std::make_shared<Model>(argc, argv);
+    auto proc = std::make_shared<Model>(argc, argv);
     
-    auto cli = CliView::create(processing);
+    auto cli = CliView::create(proc);
     
-    processing->print();
-    
+    Processing processing(proc);
+  
+
+     processing.start();
+    return 0;
 }
 

@@ -16,11 +16,13 @@ public:
     
 };
 
-class Model : public __baseModel
+class Model : public __baseModel, public std::enable_shared_from_this<Model>
 {
     std::vector<std::string> _batch;
-    int _batch_size;
-
+    std::unique_ptr<__BaseState> _state;
+    int _batch_size = 0;
+    bool status = true;
+  
 public:
     Model(int argc, char* argv[]);
 
@@ -28,6 +30,11 @@ public:
 
     int get_batch_size() const noexcept;
 
+    std::vector<std::string>& getData();
+
+    void push(const std::string& com);
+
+    bool getStatus() const noexcept override;
 
 private:
     bool __isdigit(char ch);
