@@ -4,7 +4,7 @@
 #include "console_view.h"
 #include "controller.h"
 
-
+//EOF Ctrl+D
 int main(int argc, char* argv[])
 {
 
