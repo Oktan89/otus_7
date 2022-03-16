@@ -16,20 +16,22 @@ struct IModelObservable
     virtual bool getStatus() const noexcept = 0;
     ~IModelObservable() = default;
 };
+class Model;
 
 class __BaseState
 {
-    std::shared_ptr<IModelObservable> _modelContext;
+protected:
+    std::shared_ptr<Model> _modelContext;
 
 public:
-    __BaseState(std::shared_ptr<IModelObservable> model) : _modelContext(model) {}
     
-    void setModelContext(std::shared_ptr<IModelObservable> model)
-    {
+    void setModelContext(std::shared_ptr<Model> model)
+    {   
         _modelContext = model;
     }
     virtual void ReadBlock() = 0;
     virtual void EndBlock() = 0;
     virtual void StartBlock() = 0;
+    virtual void Exit() = 0;
     ~__BaseState() = default;
 };

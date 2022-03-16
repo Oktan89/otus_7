@@ -5,12 +5,17 @@
 #define EXITSUCES  0
 #define EXITFAILURE 1 
 
+class Model;
+
 class Processing
 {
-    std::shared_ptr<IModelObservable> _model;
+    
+    std::shared_ptr<Model> _model;
 
 public:
-    explicit Processing(std::shared_ptr<IModelObservable> model) : _model(model){}
+    explicit Processing(std::shared_ptr<Model> model) : _model(model){}
+
+    void setModelState();
     
     int start();
 };

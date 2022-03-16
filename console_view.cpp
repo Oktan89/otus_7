@@ -32,5 +32,6 @@ void CliView::update()
         std::cout << *it;
     }
         
-    std::cout << std::endl;
+    if(data.size() != 0) 
+        std::cout << std::endl;
 }

@@ -7,6 +7,7 @@ class CliView : public IViewObserver, public std::enable_shared_from_this<CliVie
 public:
     using model =  std::shared_ptr<class Model>;
 private:
+   
     model _model;
 
     CliView() = default;

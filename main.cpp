@@ -1,9 +1,9 @@
 #include <iostream>
-#include <iomanip>
 #include <memory>
 #include "model.h"
 #include "console_view.h"
 #include "controller.h"
+
 
 int main(int argc, char* argv[])
 {
@@ -13,9 +13,7 @@ int main(int argc, char* argv[])
     auto cli = CliView::create(proc);
     
     Processing processing(proc);
-  
-
-     processing.start();
-    return 0;
+     
+    return processing.start();
 }
 

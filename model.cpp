@@ -54,36 +54,46 @@ Model::Model(int argc, char* argv[])
             // exit(0);
         }
     }
-    _state = std::make_unique<StaticBlock>(shared_from_this());    
+  
 }
 
-void Model::print()
-{
-    notify();
-}
 
 bool Model::__isdigit(char ch)
 {
     return std::isdigit(static_cast<unsigned char>(ch));
 }
 
-int Model::get_batch_size() const noexcept
+std::size_t Model::get_batch_size() const noexcept
 {
     return _batch_size;
+}
+
+void Model::TransitionTo(std::unique_ptr<__BaseState>& state)
+{
+    _state.swap(state);
+    _state->setModelContext(shared_from_this());
 }
 
 void Model::push(const std::string& com)
 {
     if(com == "EOF")
     {
-        _state->EndBlock();
+        _state->Exit();
     }
     else if(com == "{")
+    {
+        _state->StartBlock();
+    }
+    else if(com == "}")
+    {
+        _state->EndBlock();
+    }
+    else
     {
         _batch.emplace_back(com);
         _state->ReadBlock();
     }
-
+   
 }
 
 bool Model::getStatus() const noexcept
