@@ -8,11 +8,14 @@
 int Processing::start()
 {
     std::string input;
+    input.reserve(_model->get_batch_size());
     setModelState();
     do
     {
-        std::getline(std::cin, input);
-        _model->push(input);
+        if(std::getline(std::cin, input))
+            _model->push(input);
+        else    
+            _model->push("EOF");
         
     }while (_model->getStatus());
     
