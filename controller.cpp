@@ -15,7 +15,7 @@ int Processing::start()
         if(std::getline(std::cin, input))
             _model->push(input);
         else    
-            _model->push("EOF");
+            _model->push(protocol::eof);
         
     }while (_model->getStatus());
     

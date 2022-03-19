@@ -8,9 +8,11 @@
 int main(int argc, char* argv[])
 {
 
+
     auto proc = std::make_shared<Model>(argc, argv);
     
     auto cli = CliView::create(proc);
+    auto file = FileView::create(proc);
     
     Processing processing(proc);
      

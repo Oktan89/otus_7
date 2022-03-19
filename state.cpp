@@ -11,8 +11,11 @@ void StaticBlock::ReadBlock()
 
 void StaticBlock::StartBlock()
 {
-    _modelContext->notify();
-    _modelContext->getData().clear();
+    if(_modelContext->getData().size() != 0)
+    {
+        _modelContext->notify();
+        _modelContext->getData().clear();
+    }
 
     std::unique_ptr<__BaseState> state_dinamic = std::make_unique<DinamicBlock>();
     _modelContext->TransitionTo(state_dinamic);
@@ -25,7 +28,8 @@ void DinamicBlock::StartBlock()
 
 void StaticBlock::Exit()
 {
-    _modelContext->notify();
+    if(_modelContext->getData().size() != 0)
+        _modelContext->notify();
     _modelContext->setStatus(false);
 }
 
@@ -36,9 +40,10 @@ void DinamicBlock::Exit()
 
 void DinamicBlock::EndBlock()
 {
-    if (block_count <= 0)
+    if (block_count == 0)
     {
-        _modelContext->notify();
+        if(_modelContext->getData().size() != 0) 
+            _modelContext->notify();
         _modelContext->getData().clear();
 
         std::unique_ptr<__BaseState> state_static = std::make_unique<StaticBlock>();

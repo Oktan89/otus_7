@@ -4,6 +4,14 @@
 #include <vector>
 #include "interface.h"
 
+struct protocol
+{
+    static constexpr char eof[] = "EOF";
+    static constexpr char start[] = "{";
+    static constexpr char end[] = "}";
+};
+
+
 class __baseModel : public IModelObservable
 {
     std::list<std::weak_ptr<IViewObserver>> __observer;

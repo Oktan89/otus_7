@@ -70,21 +70,21 @@ std::size_t Model::get_batch_size() const noexcept
 
 void Model::TransitionTo(std::unique_ptr<__BaseState>& state)
 {
-    _state.swap(state);
+    _state = std::move(state);
     _state->setModelContext(shared_from_this());
 }
 
 void Model::push(const std::string& com)
 {
-    if(com == "EOF")
+    if(com == protocol::eof)
     {
         _state->Exit();
     }
-    else if(com == "{")
+    else if(com == protocol::start)
     {
         _state->StartBlock();
     }
-    else if(com == "}")
+    else if(com == protocol::end)
     {
         _state->EndBlock();
     }
