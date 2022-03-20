@@ -2,6 +2,8 @@
 
 void StaticBlock::ReadBlock()
 {
+    if(_modelContext->getData().size() == 1)
+        _modelContext->setTimeStartBlock();
     if (_modelContext->getData().size() == _modelContext->get_batch_size())
     {
         _modelContext->notify();
@@ -23,6 +25,8 @@ void StaticBlock::StartBlock()
 
 void DinamicBlock::StartBlock()
 {
+    if(block_count == 0)
+        _modelContext->setTimeStartBlock();
     ++block_count;
 }
 

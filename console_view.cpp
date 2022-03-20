@@ -57,12 +57,16 @@ void FileView::update()
 {
     std::vector<std::string>& data = _model->getData();
     
-    const std::time_t t = std::chrono::system_clock::to_time_t(
-                            std::chrono::system_clock::now());
-    std::string file_name = "bulk" + std::to_string(t)+".log";
+    Model::model_time t = _model->getTimeStartBlock();
+    
+    std::string file_name = "bulk" + 
+        std::to_string(std::chrono::system_clock::to_time_t(t)) +
+        ".log";
+
     if(std::ifstream(file_name))
     {
-        file_name = file_name + "_";
+        auto nano = std::chrono::duration_cast<std::chrono::nanoseconds>(_model->getTime() - t);
+        file_name = file_name + "_" + std::to_string(nano.count()); //todo добавить милисекунды или нано
     }
     std::ofstream file(file_name, std::ios::app);
     

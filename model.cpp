@@ -5,6 +5,8 @@
 #include <cctype>
 #include <cstdlib>
 #include <algorithm>
+#include <chrono>
+#include <ctime>
 
 void __baseModel::addObserver(std::shared_ptr<IViewObserver> observer) 
 {
@@ -46,6 +48,7 @@ Model::Model(int argc, char* argv[])
         if(__isdigit(*argv[1]) && *argv[1] >= '1')
         {
                 _batch_size = std::atoi(argv[1]);
+                _batch.reserve(_batch_size);
         }
         else 
         {
@@ -104,4 +107,19 @@ bool Model::getStatus() const noexcept
 std::vector<std::string>& Model::getData()
 {
     return _batch;
+}
+
+void Model::setTimeStartBlock()
+{
+    _t = std::chrono::system_clock::now();
+}
+
+Model::model_time Model::getTimeStartBlock() const noexcept
+{
+    return _t;
+}
+
+Model::model_time Model::getTime()
+{
+    return std::chrono::system_clock::now();
 }
