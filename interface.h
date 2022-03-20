@@ -1,6 +1,9 @@
 #pragma once
 #include <memory>
 
+#define EXITSUCES  0
+#define EXITFAILURE 1 
+
 struct IViewObserver
 {
     virtual void update() = 0;

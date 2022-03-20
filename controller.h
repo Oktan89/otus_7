@@ -2,9 +2,6 @@
 #include <memory>
 #include "interface.h"
 
-#define EXITSUCES  0
-#define EXITFAILURE 1 
-
 class Model;
 
 class Processing

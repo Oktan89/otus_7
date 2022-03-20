@@ -41,7 +41,7 @@ Model::Model(int argc, char* argv[])
     {
         std::cout << "The block size parameter is required \n" 
             <<"Usage: "<< argv[0] << " [arg] \n";
-        exit(0);
+        exit(EXITFAILURE);
     }
     else
     {
@@ -54,7 +54,7 @@ Model::Model(int argc, char* argv[])
         {
             std::cout << "Invalid parameter [arg], must be greater than: >=1\n"
                 <<"Usage example: "<< argv[0] << " 3 \n";
-            exit(0);
+            exit(EXITFAILURE);
         }
     }
   
